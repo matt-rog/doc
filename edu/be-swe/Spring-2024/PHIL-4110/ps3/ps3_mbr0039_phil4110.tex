@@ -1,0 +1,229 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{physics}
+\usepackage{changepage}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+\newenvironment{ind}
+  {\adjustwidth{3em}{0pt}}
+  {\endadjustwidth}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Problem Set 3}
+\newcommand{\hmwkDueDate}{February 26, 2024}
+\newcommand{\hmwkClass}{PHIL 4110}
+\newcommand{\hmwkClassTime}{}
+\newcommand{\hmwkClassInstructor}{Professor Lockhart}
+\newcommand{\hmwkAuthorName}{\textbf{Matthew Rogers}}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+    \vspace{3in}
+}
+
+\author{\hmwkAuthorName}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+
+    \textbf{Solution}
+    \\
+    \\
+    \textbf{Part One}
+    \[
+        s(v)=1,~~\mathfrak{M},s \models \exists x(A(f(z),c) \supset \forall y (A(y,x) \lor A(f(y),x)))
+    \]
+    Let $\varphi_1\equiv A(f(z),c) \supset \forall y (A(y,x) \lor A(f(y),x))$ \\
+    $\mathfrak{M},s \models \exists x\varphi_1$ iff $\mathfrak{M},s[m_1/x] \models \varphi_1$ for some $m_1\in\abs{\mathfrak{M}}$ \\
+    $\mathfrak{M},s[m_1/x] \models A(f(z),c) \supset \forall y (A(y,x) \lor A(f(y),x))$ for some $m_1\in\abs{\mathfrak{M}}$ \\
+    This is equivalent to the expression $\mathfrak{M},s[m_1/x] \not\models A(f(z),c)$ or $\mathfrak{M},s[m_1/x] \models \forall y (A(y,x) \lor A(f(y),x))$ for some $m_1\in\abs{\mathfrak{M}}$.\\
+    \begin{ind}
+        Evaluating $\mathfrak{M},s[m_1/x] \not\models A(f(z),c)$ for some $m_1 \in \abs{\mathfrak{M}}$: \\
+        $=\langle \text{Val}^{\mathfrak{M}}_{s[m_1/x]}(f(z)), c\rangle  \not\in A^{\mathfrak{M}}$ \\
+        $=\langle f^{\mathfrak{M}}(\text{Val}^{\mathfrak{M}}_{s[m_1/x]}(z)), \text{Val}^{\mathfrak{M}}_{s[m_1/x]}(c)\rangle  \not\in A^{\mathfrak{M}}$ \\
+        $=\langle f^{\mathfrak{M}}(1),c^{\mathfrak{M}}\rangle  \not\in A^{\mathfrak{M}}$ \\
+        $=\langle 2,3\rangle  \not\in A^{\mathfrak{M}}=\text{False}$, since $\langle 2,3\rangle $ is in $A^{\mathfrak{M}}$\\
+        \\
+        Evaluating $\mathfrak{M},s[m_1/x] \models \forall y (A(y,x) \lor A(f(y),x))$ for some $m_1\in\abs{\mathfrak{M}}$:\\
+        Let $\varphi_2\equiv A(y,x) \lor A(f(y),x)$ \\
+        $\mathfrak{M},s[m_1/x] \models \forall y\varphi_2$ iff $\mathfrak{M},s[m_1/x][m_2/y]\models\varphi_2$ for some $m_1$ for any $m_2$, such that $m_1,m_2\in\abs{\mathfrak{M}}$ \\
+        This is just the expression $\mathfrak{M},s[m_1/x][m_2/y]\models A(y,x)$ or $\mathfrak{M},s[m_1/x][m_2/y]\models A(f(y),x)$, for some $m_1$ for any $m_2$. \\
+        \begin{ind}
+            Evaluating $\mathfrak{M},s[m_1/x][m_2/y]\models A(y,x)$, for some $m_1$ for any $m_2$: \\
+            $=\langle \text{Val}^{\mathfrak{M}}_{s[m_1/x][m_2/y]}(y),\text{Val}^{\mathfrak{M}}_{s[m_1/x][m_2/y]}(x)\rangle \in A^{\mathfrak{M}}$ \\
+            $=\langle m_2, m_1 \rangle \in A^\mathfrak{M}$ for some $m_1$ for any $m_2$, such that $m_1,m_2\in\abs{\mathfrak{M}}$ \\
+            We must check for all possible values of $m_2$ in the domain: \\
+            $=\langle 1, m_1 \rangle \in A^\mathfrak{M}$ and $\langle 2, m_1 \rangle \in A^\mathfrak{M}$ and $\langle 3, m_1 \rangle \in A^\mathfrak{M}$ \\
+            \\
+            Evaluating $\mathfrak{M},s[m_1/x][m_2/y]\models A(f(y),x)$, for some $m_1$ for any $m_2$. \\
+            $=\langle \text{Val}^{\mathfrak{M}}_{s[m_1/x][m_2/y]}(f(y)),\text{Val}^{\mathfrak{M}}_{s[m_1/x][m_2/y]}(x) \rangle \in A^{\mathfrak{M}}$ \\
+            $=\langle f^{\mathfrak{M}}(\text{Val}^{\mathfrak{M}}_{s[m_1/x][m_2/y]}(y)),m_1 \rangle \in A^{\mathfrak{M}}$ \\
+            $=\langle f^{\mathfrak{M}}(m_2),m_1 \rangle \in A^{\mathfrak{M}}$ for some $m_1$ for any $m_2$, such that $m_1,m_2\in\abs{\mathfrak{M}}$ \\
+            We must check for all possible values of $m_2$ in the domain: \\
+            $=\langle f^{\mathfrak{M}}(1), m_1 \rangle \in A^\mathfrak{M}$ and $\langle f^{\mathfrak{M}}(2), m_1 \rangle \in A^\mathfrak{M}$ and $\langle f^{\mathfrak{M}}(3), m_1 \rangle \in A^\mathfrak{M}$ \\
+            $=\langle 2, m_1 \rangle \in A^\mathfrak{M}$ and $\langle 3, m_1 \rangle \in A^\mathfrak{M}$ and $\langle 2, m_1 \rangle \in A^\mathfrak{M}$ \\
+            $=\langle 2, m_1 \rangle \in A^\mathfrak{M}$ and $\langle 3, m_1 \rangle \in A^\mathfrak{M}$ \\
+        \end{ind}
+
+        $\mathfrak{M},s[m_1/x][m_2/y] \models \varphi_2$ becomes the expression:
+        \[(\langle 1, m_1 \rangle \in A^\mathfrak{M} \text{ and } \langle 2, m_1 \rangle \in A^\mathfrak{M} \text{ and } \langle 3, m_1 \rangle \in A^\mathfrak{M})
+            \text{ or } \\
+            (\langle 2, m_1 \rangle \in A^\mathfrak{M} \text{ and } \langle 3, m_1 \rangle \in A^\mathfrak{M})
+        \]
+        for some $m_1 \in \abs{\mathfrak{M}}$ \\
+        Let $m_1=3$, then the second half of the 'or' operation is satisfied, since $\langle2,3\rangle,\langle3,3\rangle\in A^{\mathfrak{M}}$. \\
+        Therefore, $\mathfrak{M},s[m_1/x][m_2/y] \models \varphi_2$ and $\mathfrak{M},s[m_1/x] \models \forall y (A(y,x) \lor A(f(y),x))$
+        
+    \end{ind}
+    \newpage
+    Recall that $\mathfrak{M},s \models \exists x\varphi_1$ iff $(\mathfrak{M},s[m_1/x] \not\models A(f(z),c)$ or $\mathfrak{M},s[m_1/x] \models \forall y (A(y,x) \lor A(f(y),x)))$ for some $m_1\in\abs{\mathfrak{M}}$. \\
+    We have shown the second half of the 'or' operation, therefore $\mathfrak{M},s \models \exists x\varphi_1$ and $\mathfrak{M},s$ satisfies the original formula.\\
+    \\
+    \textbf{Part Two}
+    \\
+    Use the originial variable assignment and structrue but have $A^{\mathfrak{M}}=\{\langle1,3\rangle\,\langle2,2\rangle\,\langle3,3\rangle\}$.
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+    \textbf{Solution}
+    \\
+
+    \textbf{Part One}
+
+    $\varphi \equiv \psi \supset \chi$ \\
+
+    By definition, $\mathfrak{M},s_1 \models \varphi$ iff $\mathfrak{M},s_1 \not\models \psi$ or $\mathfrak{M},s_1 \models \chi$. \\
+    By the IH we have $\mathfrak{M},s_2 \not\models \psi$ or $\mathfrak{M},s_2 \models \chi$. Then, $\mathfrak{M},s_2 \models \varphi$. \\
+
+    \textbf{Part Two}
+    
+    $\varphi \equiv \forall x\psi$
+
+
+
+\end{homeworkProblem}
+\end{document}

@@ -1,9 +1,10 @@
 # Introduction
+
 Windows Event Logs are an intrinsic part of the Windows Operating System, storing logs from different components of the system including the system itself, applications running on it, ETW providers, services, and others.
 
 Event logs can be accessed using the `Event Viewer` application or programmatically using APIs such as the Windows Event Log API.
 
-The "Forwarded Events" section is unique, showcasing event log data forwarded from other machines. 
+The "Forwarded Events" section is unique, showcasing event log data forwarded from other machines.
 
 ## Log Components
 
@@ -25,6 +26,7 @@ To streamline our analysis, we can create custom XML queries to identify related
 [DOCS](https://techcommunity.microsoft.com/t5/ask-the-directory-services-team/advanced-xml-filtering-in-the-windows-event-viewer/ba-p/399761)
 
 ## Windows System Logs
+
 - Event ID 1074 (System Shutdown/Restart): This event log indicates when and why the system was shut down or restarted. By monitoring these events, you can determine if there are unexpected shutdowns or restarts, potentially revealing malicious activity such as malware infection or unauthorized user access.
 - Event ID 6005 (The Event log service was started): This event log marks the time when the Event Log Service was started. This is an important record, as it can signify a system boot-up, providing a starting point for investigating system performance or potential security incidents around that period. It can also be used to detect unauthorized system reboots.
 - Event ID 6006 (The Event log service was stopped): This event log signifies the moment when the Event Log Service was stopped. It is typically seen when the system is shutting down. Abnormal or unexpected occurrences of this event could point to intentional service disruption for covering illicit activities.
@@ -32,6 +34,7 @@ To streamline our analysis, we can create custom XML queries to identify related
 - Event ID 7040 (Service status change): This event indicates a change in service startup type, which could be from manual to automatic or vice versa. If a crucial service's startup type is changed, it could be a sign of system tampering.
 
 ## Windows Security Logs
+
 - Event ID 1102 (The audit log was cleared): Clearing the audit log is often a sign of an attempt to remove evidence of an intrusion or malicious activity.
 - Event ID 1116 (Antivirus malware detection): This event is particularly important because it logs when Defender detects a malware. A surge in these events could indicate a targeted attack or widespread malware infection.
 - Event ID 1118 (Antivirus remediation activity has started): This event signifies that Defender has begun the process of removing or quarantining detected malware. It's important to monitor these events to ensure that remediation activities are successful.
@@ -57,12 +60,14 @@ To streamline our analysis, we can create custom XML queries to identify related
 - Event ID 7045 (A service was installed in the system): A sudden appearance of unknown services might suggest malware installation, as many types of malware install themselves as services.
 
 # Lab
+
 ```sh
 xfreerdp /u:Administrator /p:'HTB_@cad3my_lab_W1n10_r00t!@0' /v:[Target IP] /dynamic-resolution
 ```
 
-1. Analyze the event with ID 4624, that took place on 8/3/2022 at 10:23:25. Conduct a similar investigation as outlined in this section and provide the name of the executable responsible for the modification of the auditing settings as your answer. Answer format: T_W_____.exe
-Just to cast, finding any event ID match. For some reason use this [info](https://forum.hackthebox.com/t/windows-event-logs-finding-evil-mini-module/295357).
+1. Analyze the event with ID 4624, that took place on 8/3/2022 at 10:23:25. Conduct a similar investigation as outlined in this section and provide the name of the executable responsible for the modification of the auditing settings as your answer. Answer format: T_W**\_**.exe
+   Just to cast, finding any event ID match. For some reason use this [info](https://forum.hackthebox.com/t/windows-event-logs-finding-evil-mini-module/295357).
+
 ```xml
 <QueryList>
   <Query Id="0" Path="Security">
@@ -70,6 +75,19 @@ Just to cast, finding any event ID match. For some reason use this [info](https:
   </Query>
 </QueryList>
 ```
-Scroll to find event at the time: TiWorker.exe
 
-2. Build an XML query to determine if the previously mentioned executable modified the auditing settings of C:\Windows\Microsoft.NET\Framework64\v4.0.30319\WPF\wpfgfx_v0400.dll. Enter the time of the identified event in the format HH:MM:SS as your answer. 
+Scroll to find event at the time: **TiWorker.exe**
+
+2. Build an XML query to determine if the previously mentioned executable modified the auditing settings of C:\Windows\Microsoft.NET\Framework64\v4.0.30319\WPF\wpfgfx_v0400.dll. Enter the time of the identified event in the format HH:MM:SS as your answer.
+
+```xml
+<QueryList>
+  <Query Id="0" Path="Security">
+    <Select Path="Security">
+        *[EventData[Data and (Data='C:\Windows\Microsoft.NET\Framework64\v4.0.30319\WPF\wpfgfx_v0400.dll')]
+    </Select>
+  </Query>
+</QueryList>
+```
+
+Search it, you get 2 logs. One of the processes is TiWorker: **10:23:50**
