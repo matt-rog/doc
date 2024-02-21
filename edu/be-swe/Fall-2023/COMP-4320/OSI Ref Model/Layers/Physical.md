@@ -1,0 +1,5 @@
+- Transmits raw data over the medium
+- How many nanoseconds should be between bits?
+- Handles transmission in both directions
+- Sets up and tears-down connections
+- Deals with network connector pins (electrical + physical specs)

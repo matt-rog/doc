@@ -1,0 +1,9 @@
+- Syntax + semantics of data
+- Data structures + encoding for transmitting "on the wire"
+- Two communicating entities may be different
+- Common representations
+	- Little Endian (LSB first)
+	- Big Endian (MSB first)
+	- Receiving short/long/int number
+	- Floating point numbers
+		- IEEE 754

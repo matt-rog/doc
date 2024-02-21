@@ -1,0 +1,7 @@
+- Controls operation of subnet
+- Also handles addressing, congestion control, flow control
+- How packets should be routed from source -> destination?
+- Routes can be static (wired in) or dynamic (computed)
+- Handles bottlenecks and congestion
+- Service quality (delay, transmit time, jitter)
+- Administration

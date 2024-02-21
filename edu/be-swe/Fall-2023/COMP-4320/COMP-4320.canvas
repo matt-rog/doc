@@ -1,0 +1,16 @@
+{
+	"nodes":[
+		{"type":"file","file":"BE SWE/Fall 2023/COMP-4320/Key Principles.md","id":"01767587faaf6d5d","x":-260,"y":-180,"width":400,"height":400},
+		{"id":"9a7d97a41d5413b3","x":540,"y":-480,"width":400,"height":400,"type":"file","file":"BE SWE/Fall 2023/COMP-4320/OSI Ref Model/OSI Ref Model.md"},
+		{"id":"57cf22238bf7aef1","x":1040,"y":-480,"width":400,"height":400,"type":"file","file":"BE SWE/Fall 2023/COMP-4320/OSI Ref Model/OSI Ref Model.canvas"},
+		{"id":"91df2de99a15bead","x":540,"y":80,"width":400,"height":400,"type":"file","file":"BE SWE/Fall 2023/COMP-4320/TCP-IP Ref Model/TCP-IP Ref Model.md"},
+		{"id":"449b248e19eaef67","x":1040,"y":80,"width":400,"height":400,"type":"file","file":"BE SWE/Fall 2023/COMP-4320/TCP-IP Ref Model/TCP-IP Ref Model.canvas"},
+		{"id":"758f65e513ab5a4e","x":540,"y":640,"width":400,"height":400,"type":"file","file":"BE SWE/Fall 2023/COMP-4320/Devices.md"}
+	],
+	"edges":[
+		{"id":"27bf2ee8bd05a26b","fromNode":"01767587faaf6d5d","fromSide":"right","toNode":"9a7d97a41d5413b3","toSide":"left"},
+		{"id":"0cd32eb2918afbe4","fromNode":"01767587faaf6d5d","fromSide":"right","toNode":"91df2de99a15bead","toSide":"left"},
+		{"id":"e2f456696118d91b","fromNode":"9a7d97a41d5413b3","fromSide":"right","toNode":"57cf22238bf7aef1","toSide":"left"},
+		{"id":"15167146c216364d","fromNode":"91df2de99a15bead","fromSide":"right","toNode":"449b248e19eaef67","toSide":"left"}
+	]
+}

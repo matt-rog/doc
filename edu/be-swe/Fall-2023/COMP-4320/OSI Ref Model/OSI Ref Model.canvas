@@ -1,0 +1,23 @@
+{
+	"nodes":[
+		{"type":"file","file":"BE SWE/Fall 2023/COMP-4320/OSI Ref Model/Layers/Application.md","id":"8994421bf354de23","x":-720,"y":-500,"width":400,"height":180},
+		{"type":"file","file":"BE SWE/Fall 2023/COMP-4320/OSI Ref Model/Layers/Presentation.md","id":"d600b95b5d2a29cd","x":-720,"y":-320,"width":400,"height":180},
+		{"type":"file","file":"BE SWE/Fall 2023/COMP-4320/OSI Ref Model/Layers/Session.md","id":"8077bce8e96deede","x":-720,"y":-140,"width":400,"height":180},
+		{"type":"file","file":"BE SWE/Fall 2023/COMP-4320/OSI Ref Model/Layers/Transport.md","id":"e2c0bac7be1cd984","x":-720,"y":40,"width":400,"height":200},
+		{"type":"file","file":"BE SWE/Fall 2023/COMP-4320/OSI Ref Model/Layers/Network.md","id":"6bd16739b2792d3f","x":-720,"y":240,"width":400,"height":200},
+		{"type":"file","file":"BE SWE/Fall 2023/COMP-4320/OSI Ref Model/Layers/Data Link.md","id":"386508fd240ef130","x":-720,"y":440,"width":400,"height":220},
+		{"type":"file","file":"BE SWE/Fall 2023/COMP-4320/OSI Ref Model/Layers/Physical.md","id":"fc6b3f4c3d4bb950","x":-720,"y":660,"width":400,"height":240},
+		{"type":"text","text":"# Peer Layer\n","id":"ba2484dd04cf66e7","x":80,"y":-500,"width":325,"height":180},
+		{"type":"text","text":"# Adj. Layer\n","id":"9d79be0b9feb7879","x":80,"y":-320,"width":325,"height":180}
+	],
+	"edges":[
+		{"id":"bb4feb840d33f9e3","fromNode":"8994421bf354de23","fromSide":"left","toNode":"d600b95b5d2a29cd","toSide":"left","label":"Interface"},
+		{"id":"1911369933cc9c38","fromNode":"8994421bf354de23","fromSide":"right","toNode":"ba2484dd04cf66e7","toSide":"left","fromEnd":"arrow","label":"Protocol"},
+		{"id":"a486102f8a67fe18","fromNode":"ba2484dd04cf66e7","fromSide":"right","toNode":"9d79be0b9feb7879","toSide":"right","label":"Interface"},
+		{"id":"07a16184f3261718","fromNode":"d600b95b5d2a29cd","fromSide":"left","toNode":"8077bce8e96deede","toSide":"left","label":"Interface"},
+		{"id":"e7d52e5f1bea219f","fromNode":"e2c0bac7be1cd984","fromSide":"left","toNode":"6bd16739b2792d3f","toSide":"left","label":"Interface"},
+		{"id":"0e270b212e20f12b","fromNode":"8077bce8e96deede","fromSide":"left","toNode":"e2c0bac7be1cd984","toSide":"left","label":"Interface"},
+		{"id":"a6baf8a61560cd6f","fromNode":"6bd16739b2792d3f","fromSide":"left","toNode":"386508fd240ef130","toSide":"left","label":"Interface"},
+		{"id":"c3844fc9151f7b17","fromNode":"386508fd240ef130","fromSide":"left","toNode":"fc6b3f4c3d4bb950","toSide":"left","label":"Interface"}
+	]
+}
