@@ -66,8 +66,11 @@ xfreerdp /u:Administrator /p:'HTB_@cad3my_lab_W1n10_r00t!@0' /v:[Target IP] /dyn
 ```
 
 1. Analyze the event with ID 4624, that took place on 8/3/2022 at 10:23:25. Conduct a similar investigation as outlined in this section and provide the name of the executable responsible for the modification of the auditing settings as your answer. Answer format: T_W**\_**.exe
-   Just to cast, finding any event ID match. For some reason use this [info](https://forum.hackthebox.com/t/windows-event-logs-finding-evil-mini-module/295357).
 
+<details>
+<summary>Guide</summary>
+   
+Just to cast, finding any event ID match. For some reason use this [info](https://forum.hackthebox.com/t/windows-event-logs-finding-evil-mini-module/295357).
 ```xml
 <QueryList>
   <Query Id="0" Path="Security">
@@ -76,10 +79,18 @@ xfreerdp /u:Administrator /p:'HTB_@cad3my_lab_W1n10_r00t!@0' /v:[Target IP] /dyn
 </QueryList>
 ```
 
-Scroll to find event at the time: **TiWorker.exe**
+Scroll to find event at the time.
+</details>
+<details>
+<summary>Answer</summary>
+   TiWorker.exe
+</details>
 
 2. Build an XML query to determine if the previously mentioned executable modified the auditing settings of C:\Windows\Microsoft.NET\Framework64\v4.0.30319\WPF\wpfgfx_v0400.dll. Enter the time of the identified event in the format HH:MM:SS as your answer.
 
+<details>
+<summary>Guide</summary>
+   
 ```xml
 <QueryList>
   <Query Id="0" Path="Security">
@@ -90,4 +101,10 @@ Scroll to find event at the time: **TiWorker.exe**
 </QueryList>
 ```
 
-Search it, you get 2 logs. One of the processes is TiWorker: **10:23:50**
+Search it, you get 2 logs. One of the processes is TiWorker
+</details>
+<details>
+<summary>Answer</summary>
+10:23:50
+</details>
+
