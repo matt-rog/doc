@@ -1,8 +1,10 @@
 # Analyzing Evil With Sysmon & Event Logs
-**System Monitor (Sysmon)** is a Windows system service and device driver that 
-remains resident across system reboots to monitor and log system activity to the Windows event log. 
+
+**System Monitor (Sysmon)** is a Windows system service and device driver that
+remains resident across system reboots to monitor and log system activity to the Windows event log.
 Sysmon provides detailed information about process creation, network connections, changes to file creation time, and more. \
 Includes:
+
 - A Windows service for monitoring system activity.
 - A device driver that assists in capturing the system activity data.
 - An event log to display captured activity data.
@@ -12,16 +14,21 @@ XML Config: https://github.com/SwiftOnSecurity/sysmon-config \
 Download: https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon
 
 Install command
+
 ```ps
 sysmon.exe -i -accepteula -h md5,sha256,imphash -l -n
 ```
+
 Use custom config
+
 ```ps
 sysmon.exe -c filename.xml
 ```
+
 Once config updated, to view these events, navigate to the Event Viewer and access "Applications and Services" -> "Microsoft" -> "Windows" -> "Sysmon."
 
 # Lab
+
 1. Replicate the DLL hijacking attack described in this section and provide the SHA256 hash of the malicious WININET.dll as your answer. "C:\Tools\Sysmon" and "C:\Tools\Reflective DLLInjection" on the spawned target contain everything you need.
 
 <details>
@@ -59,13 +66,16 @@ It returns one event log.
 <summary>Guide</summary>
 
 Literally just following the guide, start "Process Hacker" from the search bar. Open powershell, run the following (line by line). Be sure to put in your process ID.
+
 ```ps
  powershell -ep bypass
  Import-Module .\Invoke-PSInject.ps1
  Invoke-PSInject -ProcId [Process ID of spoolsv.exe] -PoshCode "V3JpdGUtSG9zdCAiSGVsbG8sIEd1cnU5OSEi"
 ```
+
 Give it a couple seconds and in process hacker you should see the spoolsv.exe process turn green, meaning its managed.\
 To find the event, run this xml filter. I got the locations of what to filter for from the guide + question.
+
 ```xml
 <QueryList>
   <Query Id="0" Path="Microsoft-Windows-Sysmon/Operational">
@@ -76,9 +86,27 @@ To find the event, run this xml filter. I got the locations of what to filter fo
   </Query>
 </QueryList>
 ```
+
 You'll get one event, pull the SHA from there.
+
 </details>
 <details>
 <summary>Answer</summary>
 8A3CD3CF2249E9971806B15C75A892E6A44CCA5FF5EA5CA89FDA951CD2C09AA9
+</details>
+
+3. Replicate the Credential Dumping attack described in this section and provide the NTLM hash of the Administrator user as your answer. "C:\Tools\Sysmon" and "C:\Tools\Mimikatz" on the spawned target contain everything you need.
+
+<details>
+<summary>Guide</summary>
+
+Via cmd line, go the the directory of the Mimikatz tool "\Tools\Mimikatz" and then start the executable in that folder, `AgentEXE.exe`. \
+The Mimikatz tool will prompt you to run modules. \
+Run the `privilege::debug` module and then the `sekurlsa::logonpasswords` module. \
+The output of the last module will contain the hashes for the admin credentials. \ The NTLM is the flag.
+
+</details>
+<details>
+<summary>Answer</summary>
+5e4ffd54b3849aa720ed39f50185e533
 </details>

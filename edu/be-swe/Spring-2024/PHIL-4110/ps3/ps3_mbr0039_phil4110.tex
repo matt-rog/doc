@@ -169,19 +169,19 @@
         \\
         Evaluating $\mathfrak{M},s[m_1/x] \models \forall y (A(y,x) \lor A(f(y),x))$ for some $m_1\in\abs{\mathfrak{M}}$:\\
         Let $\varphi_2\equiv A(y,x) \lor A(f(y),x)$ \\
-        $\mathfrak{M},s[m_1/x] \models \forall y\varphi_2$ iff $\mathfrak{M},s[m_1/x][m_2/y]\models\varphi_2$ for some $m_1$ for any $m_2$, such that $m_1,m_2\in\abs{\mathfrak{M}}$ \\
-        This is just the expression $\mathfrak{M},s[m_1/x][m_2/y]\models A(y,x)$ or $\mathfrak{M},s[m_1/x][m_2/y]\models A(f(y),x)$, for some $m_1$ for any $m_2$. \\
+        $\mathfrak{M},s[m_1/x] \models \forall y\varphi_2$ iff $\mathfrak{M},s[m_1/x][m_2/y]\models\varphi_2$ for some $m_1$ for all $m_2$, such that $m_1,m_2\in\abs{\mathfrak{M}}$ \\
+        This is just the expression $\mathfrak{M},s[m_1/x][m_2/y]\models A(y,x)$ or $\mathfrak{M},s[m_1/x][m_2/y]\models A(f(y),x)$, for some $m_1$ for all $m_2$. \\
         \begin{ind}
-            Evaluating $\mathfrak{M},s[m_1/x][m_2/y]\models A(y,x)$, for some $m_1$ for any $m_2$: \\
+            Evaluating $\mathfrak{M},s[m_1/x][m_2/y]\models A(y,x)$, for some $m_1$ for all $m_2$: \\
             $=\langle \text{Val}^{\mathfrak{M}}_{s[m_1/x][m_2/y]}(y),\text{Val}^{\mathfrak{M}}_{s[m_1/x][m_2/y]}(x)\rangle \in A^{\mathfrak{M}}$ \\
-            $=\langle m_2, m_1 \rangle \in A^\mathfrak{M}$ for some $m_1$ for any $m_2$, such that $m_1,m_2\in\abs{\mathfrak{M}}$ \\
+            $=\langle m_2, m_1 \rangle \in A^\mathfrak{M}$ for some $m_1$ for all $m_2$, such that $m_1,m_2\in\abs{\mathfrak{M}}$ \\
             We must check for all possible values of $m_2$ in the domain: \\
             $=\langle 1, m_1 \rangle \in A^\mathfrak{M}$ and $\langle 2, m_1 \rangle \in A^\mathfrak{M}$ and $\langle 3, m_1 \rangle \in A^\mathfrak{M}$ \\
             \\
-            Evaluating $\mathfrak{M},s[m_1/x][m_2/y]\models A(f(y),x)$, for some $m_1$ for any $m_2$. \\
+            Evaluating $\mathfrak{M},s[m_1/x][m_2/y]\models A(f(y),x)$, for some $m_1$ for all $m_2$. \\
             $=\langle \text{Val}^{\mathfrak{M}}_{s[m_1/x][m_2/y]}(f(y)),\text{Val}^{\mathfrak{M}}_{s[m_1/x][m_2/y]}(x) \rangle \in A^{\mathfrak{M}}$ \\
             $=\langle f^{\mathfrak{M}}(\text{Val}^{\mathfrak{M}}_{s[m_1/x][m_2/y]}(y)),m_1 \rangle \in A^{\mathfrak{M}}$ \\
-            $=\langle f^{\mathfrak{M}}(m_2),m_1 \rangle \in A^{\mathfrak{M}}$ for some $m_1$ for any $m_2$, such that $m_1,m_2\in\abs{\mathfrak{M}}$ \\
+            $=\langle f^{\mathfrak{M}}(m_2),m_1 \rangle \in A^{\mathfrak{M}}$ for some $m_1$ for all $m_2$, such that $m_1,m_2\in\abs{\mathfrak{M}}$ \\
             We must check for all possible values of $m_2$ in the domain: \\
             $=\langle f^{\mathfrak{M}}(1), m_1 \rangle \in A^\mathfrak{M}$ and $\langle f^{\mathfrak{M}}(2), m_1 \rangle \in A^\mathfrak{M}$ and $\langle f^{\mathfrak{M}}(3), m_1 \rangle \in A^\mathfrak{M}$ \\
             $=\langle 2, m_1 \rangle \in A^\mathfrak{M}$ and $\langle 3, m_1 \rangle \in A^\mathfrak{M}$ and $\langle 2, m_1 \rangle \in A^\mathfrak{M}$ \\
@@ -201,7 +201,7 @@
     \newpage
     Recall that $\mathfrak{M},s \models \exists x\varphi_1$ iff $(\mathfrak{M},s[m_1/x] \not\models A(f(z),c)$ or $\mathfrak{M},s[m_1/x] \models \forall y (A(y,x) \lor A(f(y),x)))$ for some $m_1\in\abs{\mathfrak{M}}$. \\
     We have shown the second half of the 'or' operation, therefore $\mathfrak{M},s \models \exists x\varphi_1$ and $\mathfrak{M},s$ satisfies the original formula.\\
-    \\
+    
     \textbf{Part Two}
     \\
     Use the originial variable assignment and structrue but have $A^{\mathfrak{M}}=\{\langle1,3\rangle\,\langle2,2\rangle\,\langle3,3\rangle\}$.
@@ -209,6 +209,10 @@
 \end{homeworkProblem}
 
 \begin{homeworkProblem}
+
+    \textbf{Proposition 7.14.} If the free variables in $\varphi$ are among $x_1,\ldots,x_n$, and $s_1(x_i) = s_2(x_i)$ for $i = 1,\dots ,n$, then $\mathfrak{M},s_1 \models \varphi$ iff $\mathfrak{M}, s_2 \models \varphi$. \\
+    Induction Hypothesis: Assume $\mathfrak{M},s_1 \models \varphi$ iff $\mathfrak{M},s_2 \models \varphi$ for all formulae $\psi$ less complex than $\varphi$. \\
+
     \textbf{Solution}
     \\
 
@@ -219,9 +223,75 @@
     By definition, $\mathfrak{M},s_1 \models \varphi$ iff $\mathfrak{M},s_1 \not\models \psi$ or $\mathfrak{M},s_1 \models \chi$. \\
     By the IH we have $\mathfrak{M},s_2 \not\models \psi$ or $\mathfrak{M},s_2 \models \chi$. Then, $\mathfrak{M},s_2 \models \varphi$. \\
 
+    The other direction of the proof relies on similar reasoning. \\
+
     \textbf{Part Two}
+
+    $\varphi \equiv \forall x\psi$ \\
+
+    If $\mathfrak{M},s \models \varphi$, then for any variable assignment $s$, $\mathfrak{M},s[m/x] \models \psi$ for all $m \in \abs{\mathfrak{M}}$. \\
     
-    $\varphi \equiv \forall x\psi$
+
+
+
+
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+
+    \textbf{Proposition 7.17.} Let $\mathfrak{M}$ be a structure, $\varphi$ be a sentence, and $s$ a variable assignment. \\
+    $\mathfrak{M} \models \varphi $ iff $\mathfrak{M},s \models \varphi$. \\
+
+    \textbf{Proof}
+    \\
+    If $\mathfrak{M} \models \varphi $, then $\mathfrak{M}$ satisfies the sentence $\varphi$, and for all variable assignments $s$, $\mathfrak{M},s \models \varphi$. \\
+    \\
+    Working in the opposite direction, if $\mathfrak{M},s \models \varphi$, and $\varphi$ is a sentence, then corollary 7.15 allows us to say that $\mathfrak{M},s'\models\varphi$ for every variable assignment $s'$. \\
+    Since $\varphi$ is a sentence and is satisfied for every $s'$, then we can write $\mathfrak{M},s\models\varphi$ for all variable assignments $s$. \\
+    \\
+
+
+
+\end{homeworkProblem}
+\newpage
+\begin{homeworkProblem}
+
+    \textbf{Proposition 7.18.} Suppose $\varphi(x)$ only contains $x$ free, and $\mathfrak{M}$ is a structure. Then:
+    \begin{enumerate}
+        \item $\mathfrak{M} \models \exists x\varphi(x)$ iff $\mathfrak{M},s \models \varphi(x)$ for at least one variable assignment $s$.
+        \item $\mathfrak{M} \models \forall x\varphi(x)$ iff $\mathfrak{M},s \models \varphi(x)$ for all variable assignments $s$.
+    \end{enumerate}
+    \textbf{Proof} \\
+
+    \textbf{Part One} \\
+    If $\mathfrak{M} \models \exists x\varphi(x)$, then by definition $\mathfrak{M},s[m/x] \models \varphi(x)$ for some variable assignment $s$ from $x$ to some $m \in \abs{\mathfrak{M}}$. \\
+    Therefore there must be at least one variable assignment $s$ such that $\mathfrak{M},s\models\varphi(x)$. \\
+
+    Working in the opposite direction, assume $\mathfrak{M},s\models\varphi(x)$ for at least one variable assignment $s$. \\
+    Since $x$ is the only free variable and $\mathfrak{M},s\models\varphi(x)$, we know $s$ must at least assign $x$ to some value $m\in\abs{\mathfrak{M}}$ such that $\varphi(x)$ is satisfied relative to $s$. \\
+    Then we write $\mathfrak{M},s[m/x] \models \varphi(x)$ for some $m \in \abs{\mathfrak{M}}$, which gives way to $\mathfrak{M} \models \exists x\varphi(x)$. \\
+    \\
+    \textbf{Part Two} \\
+    If $\mathfrak{M} \models \forall x\varphi(x)$, then by definition for any variable assignment $s$, $\mathfrak{M},s[m/x] \models \varphi(x)$ for all $m \in \abs{\mathfrak{M}}$. \\
+    The satisfaction of $\varphi(x)$ relative to any $s$ is not restricted by any particular assignment of $x$, so we can write $\mathfrak{M},s\models\varphi(x)$ for all $s$. \\
+    \\
+    Working in the opposite direction, assume $\mathfrak{M},s\models\varphi(x)$ for all variable assignments $s$. \\
+    Then any $s$ could assign $x$ to any member of the domain, and we would still have $\mathfrak{M},s\models\varphi(x)$.\\
+    We can express this property of $s$ as $\mathfrak{M},s[m/x] \models \varphi(x)$ for all $m\in\abs{\mathfrak{M}}$. \\
+    This implies $\mathfrak{M} \models \forall x\varphi(x)$.\\
+    
+
+
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+
+    \textbf{Proposition 7.19.} \\
+
+    \textbf{Proof} \\
+
 
 
 
