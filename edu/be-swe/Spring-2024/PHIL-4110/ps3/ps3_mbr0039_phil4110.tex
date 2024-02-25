@@ -229,12 +229,14 @@
 
     $\varphi \equiv \forall x\psi$ \\
 
-    If $\mathfrak{M},s \models \varphi$, then for any variable assignment $s$, $\mathfrak{M},s[m/x] \models \psi$ for all $m \in \abs{\mathfrak{M}}$. \\
-    
+    If $\mathfrak{M},s_1 \models \varphi$, then for any variable assignment $s_1$, $\mathfrak{M},s_1[m/x] \models \psi$ for all $m \in \abs{\mathfrak{M}}$. \\
+    Let $s_1'=s_1[m/x]$, $s_2'=s_2[m/x]$, for all $m \in \abs{\mathfrak{M}}$.\\
+    By IH we get $s_1(x_i) = s_2(x_i)$ for any $x_i$ in the free variables of $\varphi$. \\
+    Since $s_1',s_2'$ are x-variants of $s_1,s_2$ respectively, and the free variables of $\psi$ are in those of $\varphi$ with $x$, then we know $s_1'(x_j)=s_2'(x_j)$ for any $x_j$ in the free variables of $\psi$.\\
+    Since the x-variants $s_1',s_2'$ agree on any variable assignment we can apply the IH, deriving $\mathfrak{M},s_2'\models\psi$ from $\mathfrak{M},s_1'\models\psi$. \\
+    If $\mathfrak{M},s_2'\models\psi$ where $s_2'=s_2[m/x]$, for all $m \in \abs{\mathfrak{M}}$, then $\mathfrak{M},s_2 \models \varphi$. \\
 
-
-
-
+    The other direction of the proof relies on similar reasoning. \\
 
 \end{homeworkProblem}
 
@@ -254,7 +256,6 @@
 
 
 \end{homeworkProblem}
-\newpage
 \begin{homeworkProblem}
 
     \textbf{Proposition 7.18.} Suppose $\varphi(x)$ only contains $x$ free, and $\mathfrak{M}$ is a structure. Then:
@@ -289,8 +290,99 @@
 \begin{homeworkProblem}
 
     \textbf{Proposition 7.19.} \\
+    Let $\varphi$ be a formula, and $\mathfrak{M}_1$ and $\mathfrak{M}_2$ be structures with $\abs{\mathfrak{M}_1} = \abs{\mathfrak{M}_2}$, and $s$ a variable assignment on $\abs{\mathfrak{M}_1}=\abs{\mathfrak{M}_2}$.\\
+    If 
+    \begin{ind}
+        $c^{\mathfrak{M}_1}=c^{\mathfrak{M}_2}$,\\
+        $R^{\mathfrak{M}_1}=R^{\mathfrak{M}_2}$,\\
+        and $f^{\mathfrak{M}_1}=f^{\mathfrak{M}_2}$\\
+        for every constant symbol $c$, relation symbol $R$, and function symbol $f$ occurring in $\varphi$,
+    \end{ind}    
+    then $\mathfrak{M}_1,s\models\varphi$ iff $\mathfrak{M}_2,s\models\varphi$.\\
 
     \textbf{Proof} \\
+
+    \textbf{Part One:} Valuation, Induction on Terms \\
+    We must show that for any term $t$, $\text{Val}^{\mathfrak{M}_1}_s(t)=\text{Val}^{\mathfrak{M}_2}_s(t)$\\
+    Base:
+    \begin{enumerate}
+        \item $t\equiv c$ \\
+            $\text{Val}^{\mathfrak{M}_1}_s(c)=c^{\mathfrak{M}_1}=c^{\mathfrak{M}_2}=\text{Val}^{\mathfrak{M}_2}_s(c)$
+        \item $t \equiv v$, where $v$ is a variable. \\
+            $\text{Val}^{\mathfrak{M}_1}_s(v)=s(v)=\text{Val}^{\mathfrak{M}_2}_s(v)$. $s$ is the same for both domains.
+    \end{enumerate}
+    IH: Assume for a term $t$, for any subterm $t_i$ in $t_1\hdots t_n$,  $\text{Val}^{\mathfrak{M}_1}_s(t_i)=\text{Val}^{\mathfrak{M}_2}_s(t_i)$.
+    \begin{ind}
+        Let $t\equiv f(t_1\hdots t_n)$. \\
+        $\text{Val}^{\mathfrak{M}_1}_s(t)=f^{\mathfrak{M}_1}(\text{Val}^{\mathfrak{M}_1}_s(t_1)\hdots\text{Val}^{\mathfrak{M}_1}_s(t_n))$ \\
+        Apply the IH, and then \\
+        $\text{Val}^{\mathfrak{M}_1}_s(t) = f^{\mathfrak{M}_1}(\text{Val}^{\mathfrak{M}_2}_s(t_1)\hdots\text{Val}^{\mathfrak{M}_2}_s(t_n))$ \\
+        Since $f^{\mathfrak{M}_1}=f^{\mathfrak{M}_2}$ we can write \\
+        $\text{Val}^{\mathfrak{M}_1}_s(t) = f^{\mathfrak{M}_2}(\text{Val}^{\mathfrak{M}_2}_s(t_1)\hdots\text{Val}^{\mathfrak{M}_2}_s(t_n))$ \\
+        $\text{Val}^{\mathfrak{M}_1}_s(t) = \text{Val}^{\mathfrak{M}_2}_s(t)$ \\
+    \end{ind}
+    The reasoning in the other direction is symmetrical. \\
+
+    \textbf{Part Two:} Satisfaction, Induction on Formulae \\
+    We must show that for any formula $\varphi$, $\mathfrak{M}_1,s\models\varphi$ iff  $\mathfrak{M}_2,s\models\varphi$ \\
+    Base: $\varphi$ is atomic
+    \begin{enumerate}
+        \item $\varphi\equiv \bot$ \\
+            By definition, any $\mathfrak{M},s$ satisfies $\bot$, therefore $\mathfrak{M}_1,s\models\varphi$ and $\mathfrak{M}_2,s\models\varphi$
+        
+        \item $\varphi \equiv R(t_1\hdots t_n)$ \\
+            $\mathfrak{M}_1,s\models\varphi$ iff $\langle\text{Val}^{\mathfrak{M}_1}_s(t_1)\hdots\text{Val}^{\mathfrak{M}_1}_s(t_n)\rangle\in R^{\mathfrak{M}_1}$ \\
+            From our valuation proof, we know $\text{Val}^{\mathfrak{M}_1}_s(t_1)\hdots\text{Val}^{\mathfrak{M}_1}_s(t_n) = \text{Val}^{\mathfrak{M}_2}_s(t_1)\hdots\text{Val}^{\mathfrak{M}_2}_s(t_n)$. Rewrite: \\
+            $\langle\text{Val}^{\mathfrak{M}_2}_s(t_1)\hdots\text{Val}^{\mathfrak{M}_2}_s(t_n)\rangle\in R^{\mathfrak{M}_1}$ \\
+            Since $R^{\mathfrak{M}_1}=R^{\mathfrak{M}_2}$, \\
+            $\langle\text{Val}^{\mathfrak{M}_2}_s(t_1)\hdots\text{Val}^{\mathfrak{M}_2}_s(t_n)\rangle\in R^{\mathfrak{M}_2}$ \\
+            Then $\mathfrak{M}_2,s\models\varphi$
+
+        \item $\varphi \equiv =(t_1,t_2)$ \\
+            $\mathfrak{M}_1,s\models\varphi$ iff $\text{Val}^{\mathfrak{M}_1}_s(t_1)=\text{Val}^{\mathfrak{M}_1}_s(t_2)$\\
+            We know $\text{Val}^{\mathfrak{M}_1}_s(t)=\text{Val}^{\mathfrak{M}_2}_s(t)$, so\\
+            $\text{Val}^{\mathfrak{M}_2}_s(t_1)=\text{Val}^{\mathfrak{M}_2}_s(t_2)$ \\
+            Then $\mathfrak{M}_2,s\models\varphi$
+    \end{enumerate}
+    IH: Assume the result holds for all formulae less complex than $\varphi$.
+    \begin{enumerate}
+        \item $\varphi \equiv \sim\psi$ \\
+            $\mathfrak{M}_1,s\models\varphi$ iff $\mathfrak{M}_1,s\not\models\psi$ \\
+            If $\mathfrak{M}_1,s\not\models\psi$, then by IH $\mathfrak{M}_2,s\not\models\psi$ \\
+            Then $\mathfrak{M}_2,s\models\varphi$
+
+        \item $\varphi \equiv \psi \land \chi$ \\
+            $\mathfrak{M}_1,s\models\varphi$ iff $\mathfrak{M}_1,s\models\psi$ and $\mathfrak{M}_1,s\models\chi$ \\
+            Then by IH $\mathfrak{M}_2,s\models\psi$ and $\mathfrak{M}_2,s\models\chi$ \\
+            Then $\mathfrak{M}_2,s\models\varphi$
+
+        \item $\varphi \equiv \psi \lor \chi$ \\
+            $\mathfrak{M}_1,s\models\varphi$ iff $\mathfrak{M}_1,s\models\psi$ or $\mathfrak{M}_1,s\models\chi$ \\
+            Then by IH $\mathfrak{M}_2,s\models\psi$ or $\mathfrak{M}_2,s\models\chi$ \\
+            Then $\mathfrak{M}_2,s\models\varphi$
+
+        \item $\varphi \equiv \psi \supset \chi$ \\
+            $\mathfrak{M}_1,s\models\varphi$ iff $\mathfrak{M}_1,s\not\models\psi$ or $\mathfrak{M}_1,s\models\chi$ \\
+            Then by IH $\mathfrak{M}_2,s\not\models\psi$ or $\mathfrak{M}_2,s\models\chi$ \\
+            Then $\mathfrak{M}_2,s\models\varphi$
+
+        \item $\varphi \equiv \exists x\psi$ \\
+            $\mathfrak{M}_1,s\models\varphi$ iff $\mathfrak{M}_1,s[m/x]\models\psi$ for some $m\in\abs{\mathfrak{M}_1}$ \\
+            Since $s[m/x](x)=m\in\abs{\mathfrak{M}_1}$, and $\abs{\mathfrak{M}_1}=\abs{\mathfrak{M}_2}$, then with IH we can write: \\
+            $\mathfrak{M}_2,s[m/x]\models\psi$ for some $m\in\abs{\mathfrak{M}_2}$ \\
+            Then $\mathfrak{M}_2,s\models\varphi$
+
+        \item $\varphi \equiv \forall x\psi$ \\
+            $\mathfrak{M}_1,s\models\varphi$ iff $\mathfrak{M}_1,s[m/x]\models\psi$ for all $m\in\abs{\mathfrak{M}_1}$ \\
+            Since $s[m/x](x)=m\in\abs{\mathfrak{M}_1}$, and $\abs{\mathfrak{M}_1}=\abs{\mathfrak{M}_2}$, then with IH we can write: \\
+            $\mathfrak{M}_2,s[m/x]\models\psi$ for all $m\in\abs{\mathfrak{M}_2}$ \\
+            Then $\mathfrak{M}_2,s\models\varphi$
+    \end{enumerate}
+    The reasoning in the other direction is symmetrical. \\
+
+    By induction, we've shown if two structures declare the same domain, constants, functions, relations, and variable assignments, then they must only satisfy the same formulae.
+
+
 
 
 
