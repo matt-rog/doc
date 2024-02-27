@@ -13,19 +13,26 @@ Since the question mentions ManagedInteropMethodName (sounds like a C# name) and
 
 We want to track any .NET logs using SilkETW. \
 From this directory (given by module)
+
 ```
 c:\Tools\SilkETW_SilkService_v8\v8\SilkETW
 ```
+
 Run this command (given by module)
-```
+
+```ps
 SilkETW.exe -t user -pn Microsoft-Windows-DotNETRuntime -uk 0x2038 -ot file -p C:\windows\temp\etw.json
 ```
-SilkETW will be recording logs to  C:\windows\temp\etw.json. \
+
+SilkETW will be recording logs to C:\windows\temp\etw.json. \
+Via cmd, go into `C:\Tools\GhostPack Compiled Binaries`. \
 Load the assembly by running Seatbelt (given by module) like
+
+```ps
+.\Seatbelt.exe TokenPrivileges
 ```
-C:\Tools\GhostPack Compiled Binaries>.\Seatbelt.exe TokenPrivileges
-```
-Check your etw.json. We're looking for something like ManagedInteropMethodName=G_______ion. Do CTRL+F and enter `ManagedInteropMethodName=G`. You'll find a method name, this is your flag.
+
+Check your etw.json. We're looking for something like ManagedInteropMethodName=G**\_\_\_**ion. Do CTRL+F and enter `ManagedInteropMethodName=G`. You'll find a method name, this is your flag.
 
 </details>
 <details>

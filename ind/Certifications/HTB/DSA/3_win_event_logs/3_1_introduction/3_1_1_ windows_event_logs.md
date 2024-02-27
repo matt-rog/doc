@@ -61,10 +61,6 @@ To streamline our analysis, we can create custom XML queries to identify related
 
 # Lab
 
-```sh
-xfreerdp /u:Administrator /p:'HTB_@cad3my_lab_W1n10_r00t!@0' /v:[Target IP] /dynamic-resolution
-```
-
 1. Analyze the event with ID 4624, that took place on 8/3/2022 at 10:23:25. Conduct a similar investigation as outlined in this section and provide the name of the executable responsible for the modification of the auditing settings as your answer. Answer format: T_W**\_**.exe
 
 <details>
@@ -80,6 +76,7 @@ Just to cast, finding any event ID match. For some reason use this [info](https:
 ```
 
 Scroll to find event at the time.
+
 </details>
 <details>
 <summary>Answer</summary>
@@ -102,9 +99,9 @@ Scroll to find event at the time.
 ```
 
 Search it, you get 2 logs. One of the processes is TiWorker
+
 </details>
 <details>
 <summary>Answer</summary>
 10:23:50
 </details>
-
