@@ -1,5 +1,7 @@
 # Introduction
 
+https://academy.hackthebox.com/module/216/section/2300
+
 Windows Event Logs are an intrinsic part of the Windows Operating System, storing logs from different components of the system including the system itself, applications running on it, ETW providers, services, and others.
 
 Event logs can be accessed using the `Event Viewer` application or programmatically using APIs such as the Windows Event Log API.

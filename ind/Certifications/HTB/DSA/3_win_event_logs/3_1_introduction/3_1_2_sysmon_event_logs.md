@@ -1,5 +1,7 @@
 # Analyzing Evil With Sysmon & Event Logs
 
+https://academy.hackthebox.com/module/216/section/2301
+
 **System Monitor (Sysmon)** is a Windows system service and device driver that
 remains resident across system reboots to monitor and log system activity to the Windows event log.
 Sysmon provides detailed information about process creation, network connections, changes to file creation time, and more. \
@@ -9,7 +11,7 @@ Includes:
 - A device driver that assists in capturing the system activity data.
 - An event log to display captured activity data.
 
-Docs and Event IDs: https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon \
+Docs and Event IDs: https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon#events \
 XML Config: https://github.com/SwiftOnSecurity/sysmon-config \
 Download: https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon
 
