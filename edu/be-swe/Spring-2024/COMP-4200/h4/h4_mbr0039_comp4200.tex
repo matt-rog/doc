@@ -1,0 +1,288 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{physics}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Assignment 4}
+\newcommand{\hmwkDueDate}{February 26, 2024}
+\newcommand{\hmwkClass}{COMP 4200}
+\newcommand{\hmwkClassTime}{001}
+\newcommand{\hmwkClassInstructor}{Professor Kwon}
+\newcommand{\hmwkAuthorName}{\textbf{Matthew Rogers}}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\hmwkAuthorName}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Convert the following regular expressions into equivalent NFAs.
+
+    \begin{enumerate}
+        \item $a^\ast(b\cup c)^\ast c$
+        \item $({(b\cup a)}^\ast \cup (c \cup a))^\ast(cb)^\ast$ \\
+    \end{enumerate}
+
+    \textbf{Solution}
+    \\
+    \\
+    \textbf{Part One}
+        \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+            \node[state, initial] (q_0)   {$q_0$};
+            \node[state] (q_1) [right=of q_0] {$q_1$};
+            \node[state] (q_2) [right=of q_1] {$q_2$};
+            \node[state] (q_3) [right=of q_2] {$q_3$};
+            \node[state] (q_4) [right=of q_3] {$q_4$};
+            \node[state] (q_5) [above right=of q_4] {$q_5$};
+            \node[state] (q_6) [below right=of q_4] {$q_6$};
+            \node[state] (q_7) [right=of q_5] {$q_7$};
+            \node[state] (q_8) [right=of q_6] {$q_8$};
+            \node[state] (q_9) [above right=of q_8] {$q_9$};
+            \node[state, accepting, semithick] (q_10) [right=of q_9] {$q_{10}$};
+            \path[->]
+                (q_0)
+                    edge node {$\epsilon$} (q_1)
+                    edge [loop above] node {a} (q_0)
+                (q_1)
+                    edge node {a} (q_2)
+                    edge [bend left] node {$\epsilon$} (q_4)
+                (q_2)
+                    edge node {$\epsilon$} (q_3)
+                    edge [bend left] node {$\epsilon$} (q_1)
+                (q_3)
+                    edge node {$\epsilon$} (q_4)
+                (q_4)
+                    edge node {$\epsilon$} (q_5)
+                    edge node {$\epsilon$} (q_6)
+                (q_5)
+                    edge node {b} (q_7)
+                (q_6)
+                    edge node {c} (q_8)
+                (q_7)
+                    edge [bend right=90] node {$\epsilon$} (q_4)
+                    edge node {$\epsilon$} (q_9)
+                (q_8)
+                    edge [bend left=90] node {$\epsilon$} (q_4)
+                    edge node {$\epsilon$} (q_9)
+                (q_9)
+                    edge node {c} (q_10);
+        \end{tikzpicture}
+    \end{figure}
+
+    \textbf{Part Two}
+
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[shorten >=2pt,node distance=1.56cm,on grid,auto]
+            \node[state, initial] (q_0)   {$q_0$};
+            \node[state] (q_1) [right=of q_0] {$q_1$};
+            \node[state] (q_2) [above right =of q_1] {$q_2$};
+            \node[state] (q_3) [above right=of q_2] {$q_3$};
+            \node[state] (q_4) [right=of q_3] {$q_4$};
+            \node[state] (q_5) [right=of q_2] {$q_5$};
+            \node[state] (q_6) [right=of q_5] {$q_6$};
+            \node[state] (q_7) [below right=of q_1] {$q_7$};
+            \node[state] (q_8) [right=of q_7] {$q_8$};
+            \node[state] (q_9) [right=of q_8] {$q_9$};
+            \node[state] (q_10) [below right=of q_7] {$q_{10}$};
+            \node[state] (q_11) [right=of q_10] {$q_{11}$};
+            \node[state] (q_12) [right=of q_9] {$q_{12}$};
+            \node[state] (q_13) [right=of q_12] {$q_{13}$};
+            \node[state] (q_14) [right=of q_13] {$q_{14}$};
+            \node[state] (q_15) [right=of q_14] {$q_{15}$};
+            \node[state, accepting, semithick] (q_16) [right=of q_15] {$q_{16}$};
+            \path[->]
+                (q_0)
+                    edge node {$\epsilon$} (q_1)
+                (q_1)
+                    edge node {$\epsilon$} (q_2)
+                    edge node {$\epsilon$} (q_7)
+                (q_2)
+                    edge node {$\epsilon$} (q_3)
+                    edge node {$\epsilon$} (q_5)
+                (q_3)
+                    edge node {b} (q_4)
+                (q_4)
+                    edge [bend right=100] node {$\epsilon$} (q_2)
+                    edge [bend right=100] node {$\epsilon$} (q_0)
+                    edge [bend left] node {$\epsilon$} (q_12)
+                (q_5)
+                    edge node {a} (q_6)
+                (q_6)
+                    edge [bend left] node {$\epsilon$} (q_2)
+                    edge node {$\epsilon$} (q_0)
+                    edge node {$\epsilon$} (q_12)
+                (q_7)
+                    edge node {$\epsilon$} (q_8)
+                    edge node {$\epsilon$} (q_10)
+                (q_8)
+                    edge node {c} (q_9)
+                (q_9)
+                    edge node {$\epsilon$} (q_12)
+                    edge node {$\epsilon$} (q_0)
+                (q_10)
+                    edge node {a} (q_11)
+                (q_11)
+                    edge node {$\epsilon$} (q_12)
+                    edge [bend left=50] node {$\epsilon$} (q_0)
+                (q_12)
+                    edge node {$\epsilon$} (q_13)
+                (q_13)
+                    edge node {c} (q_14)
+                (q_14)
+                    edge node {$\epsilon$} (q_15)
+                (q_15)
+                    edge node {b} (q_16)
+                (q_16)
+                    edge [bend left] node {$\epsilon$} (q_13);
+        \end{tikzpicture}
+    \end{figure}
+
+\end{homeworkProblem}
+\newpage
+\begin{homeworkProblem}
+    Convert the 2 NFA's to equivalent regular expressions. \\
+    \textbf{Solution} \\
+
+    \textbf{Part One}
+    \begin{enumerate}
+        \item Convert the NFA to a GNFA
+        \item Target the concatenations, fixing 4,5 and 8,9
+    \end{enumerate}
+
+    \textbf{Part Two}
+    \begin{enumerate}
+        \item hi
+    \end{enumerate}
+\end{homeworkProblem}
+
+\end{document}
